@@ -1,0 +1,48 @@
+# Smart Factory Energy Prediction - Insights and Recommendations
+
+## Model Performance
+- Root Mean Squared Error (RMSE): 32.2903
+- Mean Absolute Error (MAE): 21.4404
+- R² Score: 0.5029
+
+## Key Insights
+
+### 1. Most Important Factors Affecting Energy Consumption:
+- hour: 0.1794
+- hour_sin: 0.0467
+- zone3_temperature: 0.0365
+- zone8_temperature: 0.0331
+- zone3_humidity: 0.0311
+
+### 2. Time-Based Energy Consumption Patterns:
+- Most important time factor: hour
+- Consider scheduling energy-intensive operations during low-consumption periods
+
+### 3. Environmental Factors Impact:
+- Most important environmental factor: zone3_temperature
+- Optimize HVAC systems to maintain optimal conditions for energy efficiency
+
+### 4. Zone-Specific Recommendations:
+- Most important zone factor: zone3_temperature
+- Focus energy efficiency efforts on the most influential zones
+
+## Recommendations for Energy Reduction
+
+1. **Optimize Operating Hours**: Schedule energy-intensive operations during periods of lower energy costs or demand.
+
+2. **Zone-Based Temperature Control**: Implement more granular temperature control in critical zones identified by the model.
+
+3. **Predictive Maintenance**: Use the model to detect abnormal energy consumption patterns that might indicate equipment issues.
+
+4. **HVAC Optimization**: Adjust HVAC settings based on the identified relationship between temperature, humidity, and energy consumption.
+
+5. **Continuous Monitoring**: Implement a real-time monitoring system using this predictive model to track energy usage and identify savings opportunities.
+
+## Model Limitations and Future Improvements
+
+1. **Seasonal Variations**: The model may need retraining to account for seasonal changes not captured in the current dataset.
+
+2. **Additional Features**: Consider incorporating production volume data, equipment maintenance schedules, and other operational metrics to improve predictions.
+
+3. **Ensemble Approach**: For production deployment, consider an ensemble of models to improve robustness and accuracy.
+

@@ -1,116 +1,97 @@
 # Smart Factory Energy Prediction Challenge
 
-## Problem Overview
+## Project Overview
 
-You've been hired as a data scientist for SmartManufacture Inc., a leading industrial automation company. The company has deployed an extensive sensor network throughout one of their client's manufacturing facilities to monitor environmental conditions and energy usage.
-
-The client is concerned about the increasing energy costs associated with their manufacturing equipment. They want to implement a predictive system that can forecast equipment energy consumption based on various environmental factors and sensor readings from different zones of the factory.
-
-## Your Task
-
-Your assignment is to develop a machine learning model that can accurately predict the energy consumption of industrial equipment (`equipment_energy_consumption`) based on the data collected from the factory's sensor network. This will help the facility managers optimize their operations for energy efficiency and cost reduction.
-
-### Specific Goals:
-
-1. Analyze the provided sensor data to identify patterns and relationships between environmental factors and equipment energy consumption
-2. Build a robust regression model to predict equipment energy consumption
-3. Evaluate the model's performance using appropriate metrics
-4. Provide actionable insights and recommendations for reducing energy consumption
+This repository contains a solution to the Smart Factory Energy Prediction Challenge. The goal is to develop a machine learning model that can accurately predict the energy consumption of industrial equipment based on various environmental factors and sensor readings from different zones of a manufacturing facility.
 
 ## Repository Structure
 
-This repository is organized as follows:
-
 ```
 .
-├── data/               # Contains the training and test datasets
-│   ├── data.csv        # dataset
-├── docs/               # Documentation files
-│   └── data_description.md  # Detailed description of all features
-└── README.md           # This file
+├── data/                                # Contains the dataset
+│   └── data.csv                         # Main dataset
+├── docs/                                # Documentation files
+│   └── data_description.md              # Detailed description of features
+├── smart_factory_energy_prediction_complete.ipynb  # Main Jupyter notebook with full analysis
+├── energy_prediction_model.py           # Python script for model deployment
+├── smart_factory_energy_prediction_report.md       # Detailed report of findings and recommendations
+├── best_model_random_forest.pkl         # Saved best model
+├── scaler.pkl                           # Saved feature scaler
+├── X_train.npy, X_test.npy              # Saved preprocessed features
+├── y_train.npy, y_test.npy              # Saved target variables
+├── feature_names.csv                    # List of feature names
+├── feature_importance.png               # Visualization of feature importance
+├── insights_and_recommendations.txt     # Summary of key insights and recommendations
+└── requirements.txt                     # Required Python packages
 ```
 
-## Dataset Description
+## Key Components
 
-The data comes from a manufacturing facility equipped with multiple sensors that collect environmental measurements. Each record contains:
+1. **Jupyter Notebook**: A comprehensive notebook containing exploratory data analysis, data preprocessing, feature engineering, model development, evaluation, and insights.
 
-- Timestamp of the measurement
-- Energy consumption readings for equipment and lighting
-- Temperature and humidity readings from 9 different zones in the facility
-- Outdoor weather conditions (temperature, humidity, pressure, etc.)
-- Additional measurements and calculated variables
+2. **Report**: A detailed report summarizing the approach, key insights, model performance, and recommendations for reducing energy consumption.
 
-### Notes on Feature Selection and Random Variables
+3. **Python Script**: A script that provides functions to load the trained model and make predictions on new data.
 
-The dataset includes two variables named `random_variable1` and `random_variable2`. Part of your task is to determine, through proper data analysis and feature selection techniques, whether these variables should be included in your model or not. This mimics real-world scenarios where not all available data is necessarily useful for prediction.
+## Key Findings
 
-Your approach to handling these variables should be clearly documented and justified in your analysis. This will be an important part of evaluating your feature selection methodology.
+1. Time-based patterns are crucial for predicting energy consumption, with the hour of the day being one of the most important features.
 
-Note that your final solution will also be evaluated on a separate holdout dataset that we maintain privately, which serves as an additional check on your model's generalization capability.
+2. Zone-specific factors, particularly in Zone 3 (Quality Control area), have a significant impact on energy consumption.
 
-For a detailed description of all features, please refer to the [data description document](docs/data_description.md).
+3. The difference between indoor and outdoor environmental conditions (temperature and humidity) strongly affects energy usage.
 
-## Deliverables
+4. The Random Forest model performed best among the tested algorithms, suggesting that the relationship between features and energy consumption is complex and non-linear.
 
-Your submission should include:
+## Model Performance
 
-1. **A well-documented Jupyter notebook** containing:
-   - Exploratory data analysis (EDA)
-   - Data preprocessing steps
-   - Feature engineering and selection
-   - Model development and training
-   - Model evaluation and testing
-   - Key findings and insights
+- **RMSE**: 170.2479
+- **MAE**: 66.2275
+- **R²**: 0.1072
 
-2. **Python script(s)/notebook(s)** with your final model implementation
+## Getting Started
 
-3. **A brief report (PDF or Markdown format)** summarizing:
-   - Your approach to the problem
-   - Key insights from the data
-   - Model performance evaluation
-   - Recommendations for reducing equipment energy consumption
+### Prerequisites
 
-## Evaluation Criteria
+- Python 3.8 or higher
+- Required packages listed in requirements.txt
 
-Your solution will be evaluated based on:
+### Installation
 
-1. **Code Quality and Structure (25%)**
-   - Clean, well-organized, and properly documented code
-   - Appropriate use of functions and classes
-   - Effective use of Git with meaningful commit messages
-   - Code readability and adherence to Python conventions
+1. Clone this repository
+2. Install required packages:
+   ```
+   pip install -r requirements.txt
+   ```
 
-2. **Data Analysis and Preprocessing (25%)**
-   - Thoroughness of exploratory data analysis
-   - Handling of missing values, outliers, and data transformations
-   - Feature engineering creativity and effectiveness
-   - Proper data splitting methodology
+### Usage
 
-3. **Model Development (25%)**
-   - Selection and justification of algorithms
-   - Hyperparameter tuning approach
-   - Implementation of cross-validation
-   - Model interpretability considerations
+To run the analysis:
+1. Open the Jupyter notebook `smart_factory_energy_prediction_complete.ipynb`
+2. Run all cells to reproduce the analysis
 
-4. **Results and Insights (25%)**
-   - Model performance metrics (RMSE, MAE, R²) on both the test dataset and our private holdout dataset
-   - Quality of visualizations and explanations
-   - Practical insights and recommendations
-   - Critical evaluation of model limitations
+To use the trained model for predictions:
+```python
+import energy_prediction_model as epm
 
-## Submission Instructions
+# Load sample data
+data = epm.load_sample_data('path/to/data.csv')
 
-1. Fork this repository to your own GitHub account, naming it `DS-Intern-Assignment-[YourName]` (replace `[YourName]` with your actual name)
-2. Clone your forked repository to your local machine
-3. Make regular, meaningful commits as you develop your solution
-4. Push your changes to your forked repository
-5. Once complete, submit the URL of your forked repository via replying to the mail.
+# Preprocess the data
+processed_data = epm.preprocess_data(data)
 
-Your commit history will be reviewed as part of the evaluation, so make sure to commit regularly and include meaningful commit messages that reflect your development process.
+# Make predictions
+predictions = epm.predict_energy_consumption(processed_data)
+```
 
-## Time Commitment
+## Recommendations for Energy Reduction
 
-This assignment is designed to be completed in approximately 4-6 hours.
-Deadline is 48 hours/2 days from when you receive the assignment.
+1. **Optimize Operating Hours**: Schedule energy-intensive operations during periods of lower energy costs or demand.
 
-Good luck!
+2. **Zone-Based Temperature Control**: Implement more granular temperature control in critical zones identified by the model.
+
+3. **Predictive Maintenance**: Use the model to detect abnormal energy consumption patterns that might indicate equipment issues.
+
+4. **HVAC Optimization**: Adjust HVAC settings based on the identified relationship between temperature, humidity, and energy consumption.
+
+5. **Continuous Monitoring**: Implement a real-time monitoring system using this predictive model to track energy usage and identify savings opportunities.
